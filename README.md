@@ -61,6 +61,13 @@ sodium library
 
 `npm install --save-dev vite-plugin-javascript-obfuscator`
 
+
+NEW
+
+`npm install --save-dev vite-plugin-obfuscator`
+
+
+
 ### Shadcn React UI
 
 [Shadcn React UI](https://ui.shadcn.com/)
