@@ -15,3 +15,6 @@ Route::prefix('iam')
         Route::resource('permissions', PermissionController::class);
         Route::resource('users', UserController::class);
     });
+
+Route::get('/gsis-report', [RemittedController::class, 'index'])->name('gsis.report');
+Route::get('/pdf-template/{full_name}', [PdfController::class, 'generateGSISReport'])->name('pdf.template.dynamic');

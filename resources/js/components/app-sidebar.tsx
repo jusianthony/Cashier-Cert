@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, BookOpenText } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -13,6 +13,12 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+    {
+        title: 'Import GSIS',
+        href: '/remitted',
+        icon: BookOpenText,
+    },
+   
 ];
 
 const footerNavItems: NavItem[] = [
@@ -23,9 +29,10 @@ const footerNavItems: NavItem[] = [
         isActive: true,
         items: [
             {
-                title: 'Users',
-                href: '/iam/users',
+            title: 'GSISreport',
+              href: '/GSISreport',
             },
+
             {
                 title: 'Roles',
                 href: '/iam/roles',
@@ -34,6 +41,8 @@ const footerNavItems: NavItem[] = [
                 title: 'Permissions',
                 href: '/iam/permissions',
             },
+
+            
         ],
     },
 ];
