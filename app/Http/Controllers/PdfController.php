@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class PdfController extends Controller
 {
-    public function generateGSISReport($full_name = null)
+    public function generatePAGIBIGReport($full_name = null)
     {
         // ===== GET DATE RANGE =====
-        $startDate = request()->query('start'); // e.g. "January 2025"
-        $endDate   = request()->query('end');   // e.g. "March 2025"
+        $startDate = request()->query('start'); 
+        $endDate   = request()->query('end');   
 
         $startCarbon = $startDate ? Carbon::parse("1 " . $startDate)->startOfMonth() : null;
         $endCarbon   = $endDate ? Carbon::parse("1 " . $endDate)->endOfMonth() : null;
@@ -22,13 +22,13 @@ class PdfController extends Controller
         if ($full_name) {
             $query = CRemitted::query();
 
-            // Use LIKE for flexible name matching
+            // Flexible full name search
             $query->whereRaw(
                 "LOWER(CONCAT(first_name, ' ', middle_name, ' ', last_name)) LIKE ?",
                 ['%' . strtolower(trim($full_name)) . '%']
             );
 
-            // Filter by covered date with correct date parsing (prepend day 01)
+            // Filter by covered date
             if ($startCarbon && $endCarbon) {
                 $query->whereBetween(
                     DB::raw("STR_TO_DATE(CONCAT('01 ', TRIM(my_covered)), '%d %M %Y')"),
@@ -51,10 +51,8 @@ class PdfController extends Controller
         }
 
         $pdf = new CustomPdf();
-        $pdf->AddPage();
-        $pdf->setSourceFile($templatePath);
-        $tplIdx = $pdf->importPage(1);
-        $pdf->useTemplate($tplIdx, 0, 0, 210);
+        $pdf->setTemplate($templatePath); // set template once
+        $pdf->AddPage(); // automatically applies template
 
         $pdf->SetFont('Helvetica', '');
         $pdf->SetFontSize(10);
@@ -63,11 +61,12 @@ class PdfController extends Controller
         $pdf->SetXY(24, 35);
         $pdf->Write(0, 'Report generated on ' . strtoupper(now()->format('F j, Y')));
 
-
         // ===== PERIOD COVERED =====
         if ($startDate && $endDate) {
             $pdf->SetXY(89, 35);
-            $pdf->Write(0, "(with remittance dates filtered: " . strtoupper($startDate . " - " . $endDate. " ) " ));
+            $pdf->SetTextColor(128, 128, 128);
+            $pdf->Write(0, "(with remittance dates filtered: " . strtoupper($startDate . " - " . $endDate . " ) "));
+            $pdf->SetTextColor(0, 0, 0);
         }
 
         if ($employees->isEmpty()) {
@@ -75,10 +74,16 @@ class PdfController extends Controller
             $pdf->SetXY(30, 70);
             $pdf->MultiCell(0, 6, "No records found for {$full_name} between {$startDate} and {$endDate}.");
         } else {
+
+            $pdf->SetXY(10, 45);
+            $pdf->Cell(0, 20, 'C E R T I F I C A T I O N', 0, 1, 'C');
+
+
+            
             // ===== INTRO TEXT =====
             $firstEmployee = $employees->first();
             $fullName = strtoupper(trim("{$firstEmployee->first_name} {$firstEmployee->middle_name} {$firstEmployee->last_name}"));
-            $office = "DOH-CLCHD"; // static
+            $office = "DOH-CLCHD"; 
             $pagibigNo = $firstEmployee->pagibig_acctno ?? '';
 
             $certText = "This is to certify that as per records of this office, the following PAG-IBIG contributions of {$fullName} of {$office}, with HDMF No. {$pagibigNo}, were deducted from their salary and were remitted as follows:";
@@ -98,7 +103,23 @@ class PdfController extends Controller
 
             // ===== TABLE DATA =====
             $pdf->SetFont('Helvetica', '');
+            $y = $pdf->GetY();
             foreach ($employees as $employee) {
+                // Check if near bottom of page
+                if ($pdf->GetY() > 230) { 
+                    $pdf->AddPage(); // new page with template
+                    $pdf->SetFont('Helvetica', 'B');
+                    $pdf->SetXY(30, 40); 
+                    $pdf->Cell(27, 8, 'Covered Date', 1);
+                    $pdf->Cell(35, 8, 'Receipt No.', 1);
+                    $pdf->Cell(20, 8, 'Date Paid', 1);
+                    $pdf->Cell(30, 8, 'Employee Contr.', 1);
+                    $pdf->Cell(30, 8, 'Employer Contr.', 1);
+                    $pdf->Cell(24, 8, 'Total Shares', 1);
+                    $pdf->Ln();
+                    $pdf->SetFont('Helvetica', '');
+                }
+
                 $pdf->SetX(30);
                 $pdf->Cell(27, 8, $employee->my_covered ?? '', 1);
                 $pdf->Cell(35, 8, $employee->orno ?? '', 1);
@@ -114,7 +135,7 @@ class PdfController extends Controller
         $pdf->markAsLastPage();
 
         // ===== FILE NAME =====
-        $fileName = "gsis_report_" . str_replace(' ', '_', strtolower($full_name));
+        $fileName = "pagibig_report_" . str_replace(' ', '_', strtolower($full_name));
         if ($startDate && $endDate) {
             $fileName .= "_" . str_replace(' ', '_', strtolower($startDate)) . "_to_" . str_replace(' ', '_', strtolower($endDate));
         }

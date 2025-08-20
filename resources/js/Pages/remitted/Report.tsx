@@ -25,7 +25,7 @@ export default function Report({ person, remitted }) {
 
             {/* BODY */}
             <p className="mt-6 text-justify">
-                This is to certify that as per records of this Office, the following GSIS Contributions
+                This is to certify that as per records of this Office, the following PAGIBIG Contributions
                 of <strong>{person.first_name} {person.middle_name} {person.last_name}</strong>, DOH-NDP, 
                 with BP No. <strong>{person.pagibig_acctno}</strong>, were deducted from their salary and 
                 were acknowledged by Land Bank of the Philippines and Government Service Insurance System, 

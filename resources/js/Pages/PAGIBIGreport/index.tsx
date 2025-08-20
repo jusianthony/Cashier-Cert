@@ -6,10 +6,10 @@ import axios from 'axios';
 import { format } from 'date-fns';
 
 const breadcrumbs: BreadcrumbItem[] = [
-  { title: 'Dashboard', href: '/GSISreport' },
+  { title: 'Dashboard', href: '/PAGIBIGreport' },
 ];
 
-export default function GSISReport() {
+export default function PAGIBIGreport() {
   const [names, setNames] = useState<string[]>([]);
   const [selectedName, setSelectedName] = useState<string>('');
   const [pdfUrl, setPdfUrl] = useState<string>('');
@@ -18,7 +18,7 @@ export default function GSISReport() {
 
   useEffect(() => {
     axios
-      .get('/api/gsis/full-names')
+      .get('/api/pagibig/full-names')
       .then((res) => setNames(res.data))
       .catch((err) => console.error('Error fetching names:', err));
   }, []);
@@ -45,7 +45,7 @@ export default function GSISReport() {
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
-      <Head title="GSIS Report" />
+      <Head title="PAGIBIG Report" />
 
       <div className="p-4 space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
@@ -90,7 +90,7 @@ export default function GSISReport() {
               width="100%"
               height="100%"
               style={{ border: 'none' }}
-              title="GSIS Report PDF"
+              title="PAGIBIG Report PDF"
             />
           </div>
         ) : (

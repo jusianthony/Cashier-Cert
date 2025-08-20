@@ -31,17 +31,17 @@ Route::get('/', fn () => Inertia::render('welcome'))->name('home');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn () => Inertia::render('dashboard'))->name('dashboard');
 
-    Route::get('/GSISreport', fn () => Inertia::render('GSISreport/index'))->name('gsis.index');
+    Route::get('/PAGIBIGreport', fn () => Inertia::render('PAGIBIGreport/index'))->name('pagibig.index');
 
     // API: Employee full names for dropdown
-    Route::get('/api/gsis/full-names', function () {
+    Route::get('/api/pagibig/full-names', function () {
         return CRemitted::select(DB::raw("CONCAT(first_name, ' ', middle_name, ' ', last_name) as full_name"))
             ->distinct()
             ->orderBy('full_name')
             ->pluck('full_name');
-    })->name('gsis.full-names');
+    })->name('pagibig.full-names');
 
     // PDF generation
-    Route::get('/pdf-template/{full_name?}', [PdfController::class, 'generateGSISReport'])
+    Route::get('/pdf-template/{full_name?}', [PdfController::class, 'generatePAGIBIGReport'])
         ->name('pdf.template');
 });

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
-    title: 'GSIS Remitted',
+    title: 'PAG IBIG Remitted',
     href: '/remitted/index',
   },
 ];
@@ -50,10 +50,10 @@ export default function Dashboard({ remitted }: any) {
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
-      <Head title="GSIS Remitted" />
+      <Head title="PAGIBIG Remitted" />
 
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-bold">GSIS Remitted</h1>
+        <h1 className="text-xl font-bold">PAGIBIG Remitted</h1>
         <button
           onClick={() => setShowModal(true)}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"

@@ -14,7 +14,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Import GSIS',
+        title: 'Import PAGIBIG',
         href: '/remitted',
         icon: BookOpenText,
     },
@@ -29,8 +29,8 @@ const footerNavItems: NavItem[] = [
         isActive: true,
         items: [
             {
-            title: 'GSISreport',
-              href: '/GSISreport',
+            title: 'PAGIBIGreport',
+              href: '/PAGIBIGreport',
             },
 
             {
