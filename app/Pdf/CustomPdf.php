@@ -54,7 +54,7 @@ class CustomPdf extends Fpdi
 
             // Certified Correct
             $this->Cell(0, 6, "                      Certified Correct:", 0, 1, 'L');
-            $this->Ln(20); // space for signature
+            $this->Ln(10); // space for signature
 
             // === Fetch latest signature from DB ===
             $signature = CSignature::latest()->first();
@@ -62,7 +62,7 @@ class CustomPdf extends Fpdi
             if ($signature) {
             // Name
             $this->SetFont('Helvetica', 'B', 11);
-            $this->SetX(40); // same indent as "Certified Correct"
+            $this->SetX(30); // same indent as "Certified Correct"
             $this->Cell(0, 6, $signature->full_name, 0, 1, 'L');
 
             // Designation
