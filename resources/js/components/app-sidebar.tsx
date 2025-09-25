@@ -18,6 +18,13 @@ const mainNavItems: NavItem[] = [
         href: '/remitted',
         icon: BookOpenText,
     },
+
+    {
+        title: 'Import GSS',
+        href: '/gssremitted',
+        icon: BookOpenText,
+    },
+
    
 ];
 
@@ -32,6 +39,12 @@ const footerNavItems: NavItem[] = [
             title: 'PAGIBIGreport',
               href: '/PAGIBIGreport',
             },
+
+            {
+            title: 'GSSreport',
+            href: '/GSSreport',
+            },
+
 
             {
                 title: 'Roles',

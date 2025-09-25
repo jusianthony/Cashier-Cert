@@ -6,7 +6,8 @@ import axios from 'axios';
 import { format } from 'date-fns';
 
 const breadcrumbs: BreadcrumbItem[] = [
-  { title: 'Dashboard', href: '/PAGIBIGreport' },
+  { title: 'Dashboard', href: '/dashboard' },
+  { title: 'PAGIBIG Report', href: '/PAGIBIGreport' },
 ];
 
 export default function PAGIBIGreport() {
@@ -16,6 +17,7 @@ export default function PAGIBIGreport() {
   const [startMonth, setStartMonth] = useState<string>(''); // "January 2025"
   const [endMonth, setEndMonth] = useState<string>('');     // "December 2025"
 
+  // Fetch distinct employee names for dropdown
   useEffect(() => {
     axios
       .get('/api/pagibig/full-names')
@@ -30,12 +32,14 @@ export default function PAGIBIGreport() {
       if (startMonth) params.append('start', startMonth);
       if (endMonth) params.append('end', endMonth);
 
+      // ✅ matches route in web.php
       setPdfUrl(`/pdf-template/${encodeURIComponent(selectedName)}?${params.toString()}`);
     } else {
       setPdfUrl('');
     }
   }, [selectedName, startMonth, endMonth]);
 
+    // Format YYYY-MM to "Month Year"
   const formatMonthYear = (value: string) => {
     if (!value) return '';
     const [year, month] = value.split('-');
