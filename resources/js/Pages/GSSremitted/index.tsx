@@ -5,11 +5,12 @@ import { Head } from '@inertiajs/react';
 import axios from 'axios';
 
 const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'GSS Remitted',
-    href: '/GSSremitted',
-  },
+  { title: 'Dashboard', href: '/dashboard' },
+  { title: 'Import GSS', href: '/GSSremitted', },
+
 ];
+
+
 
 export default function GSSRemittedPage({ gssremitted }: any) {
   const [data, setData] = useState(gssremitted || []);

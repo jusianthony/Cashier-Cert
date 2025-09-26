@@ -44,7 +44,11 @@ const footerNavItems: NavItem[] = [
             title: 'GSSreport',
             href: '/GSSreport',
             },
-
+            
+            {
+                title: 'Users',
+                href: '/iam/users',
+            },
 
             {
                 title: 'Roles',

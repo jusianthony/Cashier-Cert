@@ -5,10 +5,9 @@ import { Head } from '@inertiajs/react';
 import axios from 'axios';
 
 const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'PAG IBIG Remitted',
-    href: '/remitted/index',
-  },
+  { title: 'Dashboard', href: '/dashboard' },
+  { title: 'Import PAG IBIG ', href: '/remitted/index',},  
+
 ];
 
 export default function Dashboard({ remitted }: any) {
