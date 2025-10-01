@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const breadcrumbs: BreadcrumbItem[] = [
   { title: 'Dashboard', href: '/dashboard' },
-  { title: 'Import GSS', href: '/GSSremitted', },
+  { title: 'Import GSIS and LOAN', href: '/GSSremitted', },
 
 ];
 

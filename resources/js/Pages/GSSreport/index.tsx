@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 
 const breadcrumbs: BreadcrumbItem[] = [
   { title: 'Dashboard', href: '/dashboard' },
-  { title: 'GSS Report', href: '/GSSreport' },
+  { title: 'GSIS contribution Report', href: '/GSSreport' },
 ];
 
 export default function GSSreport() {

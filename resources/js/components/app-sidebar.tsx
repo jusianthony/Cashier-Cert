@@ -14,13 +14,26 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Import PAGIBIG',
+        title: 'Import PAGIBIG (contri)',
         href: '/remitted',
         icon: BookOpenText,
     },
 
     {
-        title: 'Import GSS',
+        title: 'Import PAGIBIG (CL)',
+        href: '/remitted',
+        icon: BookOpenText,
+    },
+
+
+    {
+        title: 'Import PAGIBIG (MPL)',
+        href: '/remitted',
+        icon: BookOpenText,
+    },
+
+    {
+        title: 'Import GSIS (contri & loan)',
         href: '/gssremitted',
         icon: BookOpenText,
     },
@@ -29,21 +42,52 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
+    
     {
-        title: 'Identity Access Mgmt',
+        title: 'Contribution Cerificate',
         href: '#',
-        icon: Folder,
-        isActive: true,
+        icon: Folder, // You can change this to another icon if preferred
+        isActive: false,
         items: [
             {
-            title: 'PAGIBIGreport',
+            title: 'PAGIBIG report',
               href: '/PAGIBIGreport',
             },
 
             {
-            title: 'GSSreport',
+            title: 'GSIS report',
             href: '/GSSreport',
             },
+        ],
+    },
+    
+    
+    {
+        title: 'Loans Cerificate',
+        href: '#',
+        icon: Folder, // You can change this to another icon if preferred
+        isActive: true,
+        items: [
+            {
+                title: 'PAGIBIG loan report',
+                href: '/loans/pagibig',
+            },
+            {
+                title: 'GSIS loan report',
+                href: '/GSSloan',
+            },
+        ],
+    },
+     
+      
+    {
+    
+        title: 'Identity Access Mgmt',
+        href: '#',
+        icon: Folder,
+        isActive: false,
+        items: [
+
             
             {
                 title: 'Users',

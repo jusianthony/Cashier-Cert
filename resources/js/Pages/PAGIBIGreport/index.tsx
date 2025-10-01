@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 
 const breadcrumbs: BreadcrumbItem[] = [
   { title: 'Dashboard', href: '/dashboard' },
-  { title: 'PAGIBIG Report', href: '/PAGIBIGreport' },
+  { title: 'PAGIBIG contribution Report', href: '/PAGIBIGreport' },
 ];
 
 export default function PAGIBIGreport() {
